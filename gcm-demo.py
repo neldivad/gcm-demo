@@ -5,23 +5,21 @@ import plotly.graph_objs as go
 import plotly.express as px
 import statsmodels.api as sm
 from statsmodels.tsa.stattools import grangercausalitytests
-
+import random
 #-------------------------------------------------------------
-def gc_toy(seed=10, shift=0):
-  import random
-  random.seed(seed)
-  def random_timeseries(initial_value: float, volatility: float, count: int) -> list:
-    time_series = [initial_value,]
-    for _ in range(count):
-        time_series.append(time_series[-1] + initial_value * random.gauss(0.1,0.4) * volatility)
-    return time_series
-  ts = random_timeseries(120, 0.01, 200)
 
+def random_timeseries(initial_value: float, volatility: float, count: int) -> list:
+  time_series = [initial_value,]
+  for _ in range(count):
+    time_series.append(time_series[-1] + initial_value * random.gauss(0.1,0.4) * volatility)
+  return time_series
+  
+def gc_toy(shift=0):
   toy = pd.DataFrame()
   toy['data'] = ts
   toy[f'shift{shift}'] = toy['data'].shift(-shift)
   toy[f'shift{shift+2}'] = toy['data'].shift(-shift-2)
-
+  
   mu=0.2
   std = 0.55
   def gaussian_noise(x,mu,std):
@@ -266,7 +264,11 @@ with col2:
   seed = st.selectbox('Seed number', [*range(1, 100, 1)], index=9)
 with col3:
   shift = st.selectbox('Time shift', [*range(1,10,1)], index=3, key='s2')
+
+random.seed(seed)
+ts = random_timeseries(120, 0.01, 200)
+
 with st.expander(label='Granger causality simulated data (shift=0)', expanded=False):
-  gc_toy(seed= seed)
+  gc_toy()
 with st.expander(label=f'Granger causality simulated data (shift={shift})', expanded=False):
-  gc_toy(seed= seed, shift= shift)
+  gc_toy(shift= shift)
