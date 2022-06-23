@@ -89,8 +89,8 @@ def gc_example(shift= 0):
   gc_level_gdp_to_con  = grangercausalitytests(level_gdp_gc_con, [lag_sel], verbose= False)[lag_sel][0]['ssr_chi2test'][1].round(3)
   gc_dlevel_gdp_to_con = grangercausalitytests(dlevel_gdp_gc_con, [lag_sel], verbose=False)[lag_sel][0]['ssr_chi2test'][1].round(3)
   
-  level_line = make_line_chart(level_con_gc_gdp, height=400, rangeslider=False)
-  dlevel_line= make_line_chart(dlevel_con_gc_gdp, height= 400, rangeslider=False)
+  level_line = make_line_chart(level_con_gc_gdp, title=f'Level data (shift={shift})', height=400, rangeslider=False)
+  dlevel_line= make_line_chart(dlevel_con_gc_gdp, title=f'Differenced data (shift={shift})', height= 400, rangeslider=False)
 
   level_gcm  = make_gc_matrix(level_con_gc_gdp, maxlag= lag_sel, all_lags=all_lags, title=f'P-values for Granger-causality for level data, lag= {lag_sel}')
   dlevel_gcm = make_gc_matrix(dlevel_con_gc_gdp, maxlag= lag_sel, all_lags=all_lags, title=f'P-values for Granger-causality for differenced data, lag= {lag_sel}')
