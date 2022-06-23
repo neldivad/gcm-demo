@@ -252,10 +252,13 @@ def make_gc_matrix(dataframe, title, zmin=0, zmax=0.15, maxlag=12, all_lags=True
 
 #----------------------------------------------
 st.subheader('Granger causality on economic data')
-with st.expander(label='Granger causality example 1', expanded=False):
+col1, col2, col3 = st.columns([2,10,2])
+with col2:
+  shif = st.selectbox('Time shift', [*range(1,10,1)], index=3)
+with st.expander(label='Granger causality economic data', expanded=False):
   gc_example()
-with st.expander(label='Granger causality example 2', expanded=False):
-  gc_example(shift=4)
+with st.expander(label=f'Granger causality economic data (shift={shif})', expanded=False):
+  gc_example(shift= shif)
 
 st.subheader('Granger causality on toy data')
 col1, col2, col3, col4 = st.columns([2,10,10,2])
@@ -263,7 +266,7 @@ with col2:
   seed = st.selectbox('Seed number', [*range(1, 100, 1)], index=9)
 with col3:
   shift = st.selectbox('Time shift', [*range(1,10,1)], index=3)
-with st.expander(label='Granger causality Toy data (shift=0)', expanded=False):
+with st.expander(label='Granger causality simulated data (shift=0)', expanded=False):
   gc_toy(seed= seed)
-with st.expander(label=f'Granger causality Toy data (shift={shift})', expanded=False):
+with st.expander(label=f'Granger causality simulated data (shift={shift})', expanded=False):
   gc_toy(seed= seed, shift= shift)
