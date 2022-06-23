@@ -45,13 +45,13 @@ def gc_toy(seed=10, shift=0):
     all_lags= True
 
   st.markdown('#### Simulated time series plot')
-  toy_plot = make_line_chart(toy, height=400, rangeslider=False)
+  toy_plot = make_line_chart(toy, title= f'Simulated level data (shift={shift})', height=400, rangeslider=False)
   toy_gcm  = make_gc_matrix(toy, maxlag= lag_sel, all_lags=all_lags, title=f'P-values for Granger-causality for level data, lag= {lag_sel}')
   st.plotly_chart(toy_plot, use_container_width=True)
   st.plotly_chart(toy_gcm, use_container_width=True)
   
   st.markdown('#### Simulated time series (differenced) plot')
-  dtoy_plot = make_line_chart(dtoy, height=400, rangeslider=False)
+  dtoy_plot = make_line_chart(dtoy, title=f'Simulated differenced data (shift={shift})',height=400, rangeslider=False)
   dtoy_gcm  = make_gc_matrix(dtoy, maxlag= lag_sel, all_lags=all_lags, title=f'P-values for Granger-causality for differenced data, lag= {lag_sel}')
   st.plotly_chart(dtoy_plot, use_container_width=True)
   st.plotly_chart(dtoy_gcm, use_container_width=True)
