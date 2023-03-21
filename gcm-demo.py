@@ -254,9 +254,9 @@ col1, col2, col3 = st.columns([2,10,2])
 with col2:
   shif = st.selectbox('Time shift', [*range(1,10,1)], index=3, key='s1')
 with st.expander(label='Granger causality economic data', expanded=False):
-  gc_example()
+  gc_example(shift=0)
 with st.expander(label=f'Granger causality economic data (shift={shif})', expanded=False):
-  gc_example(shift= shif)
+  gc_example(shift=shif)
 
 st.subheader('Granger causality on toy data')
 col1, col2, col3, col4 = st.columns([2,10,10,2])
