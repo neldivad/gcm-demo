@@ -76,7 +76,7 @@ def gc_example(shift= 0):
   with col2:
     lag_sel = st.slider('Select Lags', 1, 25, max(1,shift), key=shift)
   with col4:
-    gcm_display = st.select_slider('Select Granger Matrix display', ['Only selected lag', 'Up to selected lags'], key=shift)
+    gcm_display = st.select_slider('Select Granger Matrix display', ['Only selected lag', 'Up to selected lags'], key=f'display_{shift}')
   if gcm_display == 'Only selected lag':
     all_lags= False
   else:
